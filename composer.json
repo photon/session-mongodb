@@ -1,0 +1,27 @@
+{
+    "name": "photon/session-mongodb",
+    "version": "1.0",
+    "type": "library",
+    "description": "MongoDB session backend.",
+    "keywords": [
+        "photon",
+        "session",
+        "mongodb"
+    ],
+    "homepage": "http://www.photon-project.com/",
+    "license": "LGPL-2.1",
+    "authors": [
+        {
+            "name": "Community",
+            "homepage": "https://github.com/photon/session-mongodb/blob/master/CONTRIBUTORS.md"
+        }
+    ],
+    "require": {
+        "photon/photon": ">=0.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "photon\\session\\storage": "src/"
+        }
+    }
+}
