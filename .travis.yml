@@ -11,6 +11,7 @@ before_script:
   - locale -a  
   - echo "extension = zmq.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
   - printf "yes\nyes\nno\nyes\n" | pecl install pecl_http-1.7.6
+  - echo 'extension = "mongo.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - composer self-update
   - mkdir test
   - cd test
