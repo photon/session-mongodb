@@ -4,6 +4,8 @@ namespace photon\session\storage;
 use \photon\db\Connection as DB;
 use \photon\config\Container as Conf;
 
+class Exception extends \Exception {}
+
 class MongoDB extends \photon\session\storage\Base
 {
     public $key = null;
@@ -17,6 +19,10 @@ class MongoDB extends \photon\session\storage\Base
         $backendConfiguration = Conf::f('session_mongodb', array());
         foreach ($backendConfiguration as $key => $value) {
             $this->$key = $value;
+        }
+
+        if ($this->database === null || $this->collection === null) {
+            throw new Exception('Configuration missing or invalid for MongoDB Session Backend');
         }
 
         $this->db = DB::get($this->database)->selectCollection($this->collection);
