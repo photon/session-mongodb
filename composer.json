@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "photon\\session\\storage": "src/"
+            "photon\\session\\storage\\": "src/"
         }
     }
 }

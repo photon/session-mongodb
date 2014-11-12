@@ -2,9 +2,9 @@
 
 namespace photon\session\storage;
 use \photon\db\Connection as DB;
-use \photon\session\storage\Base;
+use \photon\config\Container as Conf;
 
-class MongoDB extends Base
+class MongoDB extends \photon\session\storage\Base
 {
     public $key = null;
 
