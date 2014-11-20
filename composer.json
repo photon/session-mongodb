@@ -1,6 +1,6 @@
 {
     "name": "photon/session-mongodb",
-    "version": "1.0",
+    "version": "1.0.1",
     "type": "library",
     "description": "MongoDB session backend.",
     "keywords": [
@@ -11,6 +11,11 @@
     "homepage": "http://www.photon-project.com/",
     "license": "LGPL-2.1",
     "authors": [
+        {
+            "name": "William MARTIN",
+            "email": "william.martin@power-lan.com",
+            "role": "Developer"
+        },
         {
             "name": "Community",
             "homepage": "https://github.com/photon/session-mongodb/blob/master/CONTRIBUTORS.md"
