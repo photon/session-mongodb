@@ -1,9 +1,9 @@
 <?php
 
 use \photon\config\Container as Conf;
-use \photon\tests\sessionTest\SessionHighLevelTestCase;
+use \photon\tests\session\sessionTestCase\SessionHighLevelTestCase;
 
-class SessionFileTest extends SessionHighLevelTestCase
+class SessionMongoDBTest extends SessionHighLevelTestCase
 {
     public function setup()
     {
