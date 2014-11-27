@@ -1,0 +1,9 @@
+composer.json
+phpunit.xml
+CONTRIBUTORS.md
+README.md
+tests/
+.pharignore
+.travis.yml
+.gitignore
+
