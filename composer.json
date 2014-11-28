@@ -1,6 +1,5 @@
 {
     "name": "photon/session-mongodb",
-    "version": "1.0.5",
     "type": "library",
     "description": "MongoDB session backend.",
     "keywords": [
