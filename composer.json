@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "photon/photon": ">=0.3.0",
+        "photon/photon": ">=1.0.0",
         "ext-mongo": ">=1.0.0"
     },
     "autoload": {
