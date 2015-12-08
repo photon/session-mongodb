@@ -14,10 +14,13 @@ services:
 
 before_script:
   - sudo locale-gen fr_FR fr_FR.UTF-8
-  - locale -a  
-  - echo "extension = zmq.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-  - printf "yes\nyes\nno\nyes\n" | pecl install pecl_http
+  - locale -a
+  - echo 'extension = "zmq.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
   - echo 'extension = "mongo.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'extension = "raphf.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'extension = "propro.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - echo 'extension = "http.so"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+  - printf "yes\nyes\nno\nyes\n" | pecl install pecl_http
   - composer self-update
   - mkdir test
   - cd test

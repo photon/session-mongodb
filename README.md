@@ -11,7 +11,7 @@ Quick start
 
 1) Add the module in your project
 
-    composer require "photon/session-mongodb:dev-master"
+    composer require "photon/session-mongodb"
 
 or for a specific version
 
