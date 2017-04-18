@@ -21,8 +21,9 @@
         }
     ],
     "require": {
-        "photon/photon": ">=1.0.0",
-        "ext-mongo": ">=1.0.0"
+        "php" : "~5.5",
+        "photon/photon": "~2.0",
+        "mongodb/mongodb": "~1.1"
     },
     "autoload": {
         "psr-4": {
