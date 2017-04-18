@@ -16,6 +16,7 @@ before_script:
   - ./scripts/travis
   - composer init --no-interaction --stability=dev
   - composer require "photon/session-mongodb:dev-master"
+  - composer require "phpunit/phpunit:~5.0"
   - cp vendor/photon/session-mongodb/phpunit.xml .
   
 script: phpunit -c phpunit.xml
