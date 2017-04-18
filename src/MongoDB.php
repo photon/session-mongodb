@@ -90,7 +90,7 @@ class MongoDB extends \photon\session\storage\Base
         $data = array(
             '_id' => $this->key,
             'd' => $this->data,
-            't' => new \MongoDate,
+            't' => new \MongoDB\BSON\UTCDateTime((int)(microtime(true) * 1000)),
         );
 
         // Update or create the session
