@@ -94,7 +94,7 @@ class MongoDB extends \photon\session\storage\Base
         );
 
         // Update or create the session
-        $this->db->update(
+        $this->db->updateOne(
             array('_id' => $this->key),
             $data,
             array('upsert' => true)
