@@ -21,7 +21,7 @@
         }
     ],
     "require": {
-        "php" : "~5.5",
+        "php" : "^5.5 || ^7.0",
         "photon/photon": "~2.0",
         "mongodb/mongodb": "~1.1"
     },
