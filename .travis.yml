@@ -19,5 +19,5 @@ before_script:
   - composer require "phpunit/phpunit:~5.0"
   - cp vendor/photon/session-mongodb/phpunit.xml .
   
-script: phpunit -c phpunit.xml
+script: ./vendor/bin/phpunit -c phpunit.xml
 
