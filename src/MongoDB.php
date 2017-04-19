@@ -55,7 +55,7 @@ class MongoDB extends \photon\session\storage\Base
             return false;
         }
 
-        $this->data = $sess['d'];
+        $this->data = (array)$sess['d'];
 
         return true;
     }
