@@ -9,7 +9,7 @@ MongoDB backend for session storage
 PHP Versions
 ------------
 
-- 5.6, 7.0 and 7.1 are supported and tested under travis
+- 7.0 and 7.1 are supported and tested under travis
 - Use ext-mongodb and mongodb/mongodb. Do not works anymore with legacy ext-mongo
 
 
@@ -52,4 +52,3 @@ or for a specific version
     ),
 
 5) Enjoy !
-
