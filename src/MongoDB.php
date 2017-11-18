@@ -13,6 +13,7 @@ class MongoDB extends \photon\session\storage\Base
     private $db = null;
     private $database = null;
     private $collection = null;
+    private $timeout = null;
 
     public function __construct()
     {
@@ -21,23 +22,28 @@ class MongoDB extends \photon\session\storage\Base
             $this->$key = $value;
         }
 
+        $this->timeout = Conf::f('session_timeout', null);
+        if ($this->timeout === null) {
+          throw new \InvalidArgumentException('Configuration key session_timeout is not defined');
+        }
+
         if ($this->database === null || $this->collection === null) {
             throw new Exception('Configuration missing or invalid for MongoDB Session Backend');
         }
 
         $this->db = DB::get($this->database)->selectCollection($this->collection);
-    } 
+    }
 
     /**
      * Given a the request object, init itself.
      *
-     * @required public function init($key, $request=null) 
+     * @required public function init($key, $request=null)
      *
      * @param $key Session key
      * @param $request Request object (null)
      * @return Session key
      */
-    public function init($key, $request=null) 
+    public function init($key, $request=null)
     {
         $this->key = $key;
     }
@@ -55,8 +61,15 @@ class MongoDB extends \photon\session\storage\Base
             return false;
         }
 
-        $this->data = (array)$sess['d'];
+        // Ensure the session is not expired, session are delete by the TTL index
+        $lastAccess = $sess['t']->toDateTime()->getTimestamp();
+        if (($lastAccess + $this->timeout) < time()) {
+          $this->data = array();
+          return false;
+        }
 
+        // Return the session
+        $this->data = (array)$sess['d'];
         return true;
     }
 
@@ -78,7 +91,7 @@ class MongoDB extends \photon\session\storage\Base
      *
      * The commit call must ensure that $this->key is set afterwards.
      *
-     * @required public function commit($response=null) 
+     * @required public function commit($response=null)
      */
     public function commit($response)
     {
@@ -102,5 +115,31 @@ class MongoDB extends \photon\session\storage\Base
 
         return $this->key;
     }
-}
 
+    public static function createIndex()
+    {
+      $backend = new self;
+      $backend->_createIndex();
+    }
+
+    private function _createIndex()
+    {
+      // Create the index, or delete the previous one if session_timeout have changed
+      try {
+        $this->db->createIndex(
+            array('t' => 1),
+            array('expireAfterSeconds' => $this->timeout)
+        );
+
+        return;
+      } catch (\MongoDB\Driver\Exception\RuntimeException $e) {
+          $this->db->dropIndex('t_1');
+      }
+
+      // Create the index if just deleted
+      $this->db->createIndex(
+          array('t' => 1),
+          array('expireAfterSeconds' => $this->timeout)
+      );
+    }
+}

@@ -21,4 +21,5 @@ return array(
         'database' => 'session-db',
         'collection' => 'session',
     ),
+    'session_timeout' => 24 * 3600,
 );
