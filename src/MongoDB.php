@@ -31,8 +31,16 @@ class MongoDB extends \photon\session\storage\Base
             throw new Exception('Configuration missing or invalid for MongoDB Session Backend');
         }
 
-        $this->db = DB::get($this->database)->selectCollection($this->collection);
+
     }
+
+    private function initDB()
+    {
+        if ($this->db === null) {
+            $this->db = DB::get($this->database)->selectCollection($this->collection);
+        }
+    }
+
 
     /**
      * Given a the request object, init itself.
@@ -55,6 +63,7 @@ class MongoDB extends \photon\session\storage\Base
             return false;
         }
 
+        $this->initDB();
         $sess = $this->db->findOne(array('_id' => $this->key));
         if (null === $sess) {
             $this->data = array();
@@ -81,6 +90,7 @@ class MongoDB extends \photon\session\storage\Base
      */
     public function keyExists($key)
     {
+        $this->initDB();
         $sess = $this->db->findOne(array('_id' => $key));
         return (null !== $sess);
     }
@@ -107,6 +117,7 @@ class MongoDB extends \photon\session\storage\Base
         );
 
         // Update or create the session
+        $this->initDB();
         $this->db->replaceOne(
             array('_id' => $this->key),
             $data,
@@ -124,6 +135,8 @@ class MongoDB extends \photon\session\storage\Base
 
     private function _createIndex()
     {
+      $this->initDB();
+
       // Create the index, or delete the previous one if session_timeout have changed
       try {
         $this->db->createIndex(
